@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temprature Sensor</title>
+</head>
+
+<style>
+    body{
+        background:black;
+    }
+
+    .temp_show{
+        position: absolute;
+        height: 200px;
+        width: 200px;
+        background: rgb(189, 61, 189);
+        border-radius: 50%;
+    }
+
+    .cel{
+        left: 150px;
+        top: 75px;
+    }
+
+    .far{
+        left: 150px;
+        bottom: 75px;
+    }
+
+    .ctext{
+        background: black;
+        height: 150px;
+        width: 150px;
+        left: 26px;
+        top: 26px;
+        color: rgb(241, 176, 241);
+    }
+
+    .ftext{
+        background: black;
+        height: 150px;
+        width: 150px;
+        left: 26px;
+        top: 26px;
+        color: rgb(241, 176, 241);
+    }
+
+    .chart{
+        position: absolute;
+        height: 525px;
+        width: 800px;
+        left: 500px;
+        top: 50px;
+    }
+
+    #cel_temp{
+        position: absolute;
+        font-size: 50px;
+        font-family: 'Times New Roman', Times, serif;
+        left: 45px;
+        top: 45px;
+    }
+
+    #far_temp{
+        position: absolute;
+        font-size: 50px;
+        font-family: 'Times New Roman', Times, serif;
+        left: 45px;
+        top: 49px;
+    }
+
+    .signc{
+        color: rgb(241, 176, 241);;
+        position: absolute;
+        left: 100px;
+        top: 50px;
+    }
+
+    .signf{
+        color: rgb(241, 176, 241);;
+        position: absolute;
+        left: 100px;
+        top: 50px;
+    }
+</style>
+
+<script  type="text/javascript">
+    window.onload = function () {
+    
+    var dps1 = [];
+    var dps2 = []; // dataPoints
+    var chart = new CanvasJS.Chart("chartContainer", {
+        backgroundColor: "black",
+        axisX:{
+            title: "Time(sec)",
+            titleFontSize: 20,
+            titleFontColor: "violet",
+            lineColor: "violet",
+            labelFontColor: "violet"
+        },
+        axisY:{
+            title: "Celsius",
+            titleFontSize: 20,
+            titleFontColor: "violet",
+            gridThickness: 0,
+            lineColor: "violet",
+            labelFontColor: "violet"
+        },
+        data: [{
+            type: "line",
+            dataPoints: dps1,
+            lineColor: "violet"
+        }]
+    });
+    
+    var chart2 = new CanvasJS.Chart("chartContainer2", {
+        backgroundColor: "black",
+        axisX:{
+            title: "Time(sec)",
+            titleFontSize: 20,
+            titleFontColor: "violet",
+            lineColor: "violet",
+            labelFontColor: "violet"
+        },
+        axisY:{
+            title: "Fahrenheit",
+            titleFontSize: 20,
+            titleFontColor: "violet",
+            gridThickness: 0,
+            lineColor: "violet",
+            labelFontColor: "violet",
+            labelFontColor: "violet"
+        },
+        data: [
+        {
+            type: "line",
+            dataPoints: dps2,
+            lineColor: "violet"
+        }]
+    });
+    
+    var xVal = 0;
+    var yVal = 100; 
+    var updateInterval = 1000;
+    var dataLength = 10; // number of dataPoints visible at any point
+    
+    var updateChart = function (count) {
+    
+        count = count || 1;
+    
+        for (var j = 0; j < count; j++) {
+            yVal = Math.floor((Math.random() * 10) + 20);
+            dps1.push({
+                x: xVal,
+                y: yVal
+            });
+            dps2.push({
+                x: xVal,
+                y: Math.floor(yVal*(9/5)+32)
+            });
+            xVal++;
+            
+            jQuery('#cel_temp').html(yVal);
+            jQuery('#far_temp').html( Math.floor(yVal*(9/5)+32));
+        }
+        
+    
+        if (dps1.length > dataLength) {
+            dps1.shift();
+            dps2.shift();
+        }
+    
+        chart.render();
+        chart2.render();
+    };
+    
+    updateChart(dataLength);
+    setInterval(function(){updateChart()}, updateInterval);
+    
+    }
+</script>
+
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div class="temp_show cel"><div class="temp_show cel ctext">
+        <div id="cel_temp">24</div><div class="signc">°C</div>
+    </div></div> 
+    <div class="temp_show far"><div class="temp_show far ftext">
+        <div id="far_temp">75</div><div class="signf">°F</div>
+    </div></div>   
+    <div class="chart">
+        <div id="chartContainer" style="height: 262px; width: 100%;"></div>
+        <div id="chartContainer2" style="height: 262px; width: 100%;"></div>
+    </div>
+</body>
+</html>
