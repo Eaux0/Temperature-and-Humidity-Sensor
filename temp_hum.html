@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background:black;
+    }
+
+    .temp_show{
+        position: absolute;
+        height: 200px;
+        width: 200px;
+        background: rgb(189, 61, 189);
+        border-radius: 50%;
+    }
+
+    .cel{
+        left: 375px;
+        top: 170px;
+    }
+
+    .far{
+        right: 400px;
+        top: 170px;
+    }
+
+    .ctext{
+        background: black;
+        height: 150px;
+        width: 150px;
+        left: 26px;
+        top: 26px;
+        color: rgb(241, 176, 241);
+    }
+
+    .ftext{
+        background: black;
+        height: 150px;
+        width: 150px;
+        left: 26px;
+        top: 26px;
+        color: rgb(241, 176, 241);
+    }
+
+    .cel_temp{
+        position: absolute;
+        font-size: 50px;
+        font-family: 'Times New Roman', Times, serif;
+        left: 45px;
+        top: 45px;
+    }
+
+    .far_temp{
+        position: absolute;
+        font-size: 50px;
+        font-family: 'Times New Roman', Times, serif;
+        left: 45px;
+        top: 49px;
+    }
+
+    .signc{
+        color: rgb(241, 176, 241);;
+        position: absolute;
+        left: 100px;
+        top: 50px;
+    }
+
+    .signf{
+        color: rgb(241, 176, 241);;
+        position: absolute;
+        left: 100px;
+        top: 50px;
+    }
+
+    .text{
+        font-size: larger;
+        position: absolute;
+        top: 200px;
+        left: 25px;
+    }
+</style>
+<body>
+    <div class="temp_show cel"><div class="temp_show cel ctext">
+        <div id="temp" class="cel_temp">28</div><div class="signc">°C</div> <br>
+        <div class="text">Temprature</div>
+    </div></div> 
+
+    <div class="temp_show far"><div class="temp_show far ftext">
+        <div id="hum" class="far_temp">20</div><div class="signf">%</div> <br>
+        <div class="text" style="left: 35px;">Humidity</div>
+    </div></div>   
+</body>
+</html>
